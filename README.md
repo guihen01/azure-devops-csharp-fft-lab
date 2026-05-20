@@ -70,10 +70,3 @@ The pipeline automatically:
 - runs unit tests
 - publishes build artifacts
 
-## Future Improvements
-
-- Docker support
-- Azure Container Registry (ACR)
-- Azure Container Apps deployment
-- Terraform integration
-- Custom FFT NuGet package
