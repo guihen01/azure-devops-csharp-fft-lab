@@ -1,0 +1,29 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.x'
+
+- script: dotnet restore
+  displayName: Restore NuGet Packages
+
+- script: dotnet build --configuration Release
+  displayName: Build Application
+
+- script: dotnet test --configuration Release
+  displayName: Run Unit Tests
+
+- script: dotnet publish src/FftConsoleApp -c Release -o $(Build.ArtifactStagingDirectory)
+  displayName: Publish Application
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'fft-console-app'
